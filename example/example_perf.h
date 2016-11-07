@@ -1,11 +1,7 @@
 #ifndef PERF_H
 #define PERF_H
 
-#include "nanovg.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
+#include <NanoVG/nanovg.h>
 
 enum GraphrenderStyle {
     GRAPH_RENDER_FPS,
@@ -38,9 +34,5 @@ typedef struct GPUtimer GPUtimer;
 void initGPUTimer(GPUtimer* timer);
 void startGPUTimer(GPUtimer* timer);
 int stopGPUTimer(GPUtimer* timer, float* times, int maxTimes);
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif // PERF_H

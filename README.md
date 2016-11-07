@@ -8,7 +8,7 @@ NanoVG is small antialiased vector graphics rendering library for OpenGL. It has
 
 ## Screenshot
 
-![screenshot of some text rendered witht the sample program](/example/screenshot-01.png?raw=true)
+![screenshot of some text rendered witht the sample program](/example/images/screenshot-01.png?raw=true)
 
 Usage
 =====

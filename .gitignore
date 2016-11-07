@@ -5,12 +5,8 @@
 *.exe
 *.o
 *.so
-test
-
-## Logs and databases #
-*.log
-*.sql
-*.sqlite
+*.a
+*.dylib
 
 ## OS generated files #
 .DS_Store
@@ -20,9 +16,3 @@ test
 .Trashes
 ehthumbs.db
 Thumbs.db
-
-## Build dir
-build/*
-
-## xcode specific
-*xcuserdata*

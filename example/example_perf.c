@@ -1,12 +1,9 @@
-#include "perf.h"
+#include "example_perf.h"
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
-#ifdef NANOVG_GLEW
-#  include <GL/glew.h>
-#endif
 #include <GLFW/glfw3.h>
-#include "nanovg.h"
+#include <NanoVG/nanovg.h>
 
 #ifdef _MSC_VER
 #define snprintf _snprintf
@@ -49,8 +46,6 @@ void startGPUTimer(GPUtimer* timer)
 
 int stopGPUTimer(GPUtimer* timer, float* times, int maxTimes)
 {
-	NVG_NOTUSED(times);
-	NVG_NOTUSED(maxTimes);
 	GLint available = 1;
 	int n = 0;
 	if (!timer->supported)

@@ -1,15 +1,11 @@
-#include "demo.h"
+#include "example_ui.h"
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
-#ifdef NANOVG_GLEW
-#  include <GL/glew.h>
-#endif
 #include <GLFW/glfw3.h>
-#include "nanovg.h"
+#include <NanoVG/nanovg.h>
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image_write.h"
-
 
 #ifdef _MSC_VER
 #define snprintf _snprintf
@@ -23,6 +19,8 @@
 #define ICON_CHECK 0x2713
 #define ICON_LOGIN 0xE740
 #define ICON_TRASH 0xE729
+
+#define NVG_PI  3.14159265358979323846264338327f
 
 //static float minf(float a, float b) { return a < b ? a : b; }
 static float maxf(float a, float b) { return a > b ? a : b; }
@@ -183,8 +181,6 @@ void drawDropDown(NVGcontext* vg, const char* text, float x, float y, float w, f
 
 void drawLabel(NVGcontext* vg, const char* text, float x, float y, float w, float h)
 {
-	NVG_NOTUSED(w);
-
 	nvgFontSize(vg, 18.0f);
 	nvgFontFace(vg, "sans");
 	nvgFillColor(vg, nvgRGBA(255,255,255,128));
@@ -247,7 +243,6 @@ void drawCheckBox(NVGcontext* vg, const char* text, float x, float y, float w, f
 {
 	NVGpaint bg;
 	char icon[8];
-	NVG_NOTUSED(w);
 
 	nvgFontSize(vg, 18.0f);
 	nvgFontFace(vg, "sans");
@@ -755,7 +750,6 @@ void drawLines(NVGcontext* vg, float x, float y, float w, float h, float t)
 	float pts[4*2], fx, fy;
 	int joins[3] = {NVG_MITER, NVG_ROUND, NVG_BEVEL};
 	int caps[3] = {NVG_BUTT, NVG_ROUND, NVG_SQUARE};
-	NVG_NOTUSED(h);
 
 	nvgSave(vg);
 	pts[0] = -s*0.25f + cosf(t*0.3f) * s*0.5f;
@@ -811,7 +805,7 @@ int loadDemoData(NVGcontext* vg, DemoData* data)
 
 	for (i = 0; i < 12; i++) {
 		char file[128];
-		snprintf(file, 128, "../example/images/image%d.jpg", i+1);
+		snprintf(file, 128, "images/image%d.jpg", i+1);
 		data->images[i] = nvgCreateImage(vg, file, 0);
 		if (data->images[i] == 0) {
 			printf("Could not load %s.\n", file);
@@ -819,22 +813,22 @@ int loadDemoData(NVGcontext* vg, DemoData* data)
 		}
 	}
 
-	data->fontIcons = nvgCreateFont(vg, "icons", "../example/entypo.ttf");
+	data->fontIcons = nvgCreateFont(vg, "icons", "fonts/entypo.ttf");
 	if (data->fontIcons == -1) {
 		printf("Could not add font icons.\n");
 		return -1;
 	}
-	data->fontNormal = nvgCreateFont(vg, "sans", "../example/Roboto-Regular.ttf");
+	data->fontNormal = nvgCreateFont(vg, "sans", "fonts/Roboto-Regular.ttf");
 	if (data->fontNormal == -1) {
 		printf("Could not add font italic.\n");
 		return -1;
 	}
-	data->fontBold = nvgCreateFont(vg, "sans-bold", "../example/Roboto-Bold.ttf");
+	data->fontBold = nvgCreateFont(vg, "sans-bold", "fonts/Roboto-Bold.ttf");
 	if (data->fontBold == -1) {
 		printf("Could not add font bold.\n");
 		return -1;
 	}
-	data->fontEmoji = nvgCreateFont(vg, "emoji", "../example/NotoEmoji-Regular.ttf");
+	data->fontEmoji = nvgCreateFont(vg, "emoji", "fonts/NotoEmoji-Regular.ttf");
 	if (data->fontEmoji == -1) {
 		printf("Could not add font emoji.\n");
 		return -1;
@@ -870,7 +864,6 @@ void drawParagraph(NVGcontext* vg, float x, float y, float width, float height, 
 	float a;
 	float gx,gy;
 	int gutter = 0;
-	NVG_NOTUSED(height);
 
 	nvgSave(vg);
 
