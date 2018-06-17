@@ -86,6 +86,7 @@ typedef enum {
     NVG_IMAGE_REPEATY          = 1<<2,  // Repeat image in Y direction.
     NVG_IMAGE_FLIPY            = 1<<3,  // Flips (inverses) image in Y direction when rendered.
     NVG_IMAGE_PREMULTIPLIED    = 1<<4,  // Image data has premultiplied alpha.
+    NVG_IMAGE_NEAREST          = 1<<5,  // Image interpolation is Nearest instead Linear.
     NVG_IMAGE_NODELETE         = 1<<16, // Backend dependent - Do not delete (texture handle).
 } NVGimageFlags;
 
